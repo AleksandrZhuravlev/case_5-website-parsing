@@ -3,7 +3,7 @@ Developers:   Zhuravlev A. (60%),
               Kremlin V. (40%)
 
 """
-import urllib.request as u  # Importing module "urlib" for working with URL.
+import urllib.request as u  # Importing module "urllib" for working with URL.
 
 with open('input.txt') as infile:  # Creating a file object by using "open" function.
     for line in infile:  # Cycle for successive player information output.
@@ -13,7 +13,7 @@ with open('input.txt') as infile:  # Creating a file object by using "open" func
         NAME = text[text.find('>', NAME) + 1:text.find('</h1', NAME)]
         ATT = text.find("passingAttempts")  # Parsing the page HTML-markup to get player's parameters (1).
         ATT = text[text.find('>', ATT) + 3:text.find('</th>', ATT)].replace('\\n', '').strip()
-        COMP = text.find("passingCompletions") # Parsing the page HTML-markup to get (1).
+        COMP = text.find("passingCompletions")  # Parsing the page HTML-markup to get (1).
         COMP = text[text.find('>', COMP) + 3:text.find('</th>', COMP)].replace('\\n', '').strip()
         YDS = text.find("passingYards")  # Parsing the page HTML-markup to get (1).
         YDS = text[text.find('>', YDS) + 3:text.find('</th>', YDS)].replace('\\n', '').strip()
