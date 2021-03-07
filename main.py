@@ -3,26 +3,26 @@ Developers:   Zhuravlev A. (60%),
               Kremlin V. (40%)
 
 """
-import urllib.request as u
+import urllib.request as u  # Импорт модуля urllib для работы с URL.
 
-with open('input.txt') as infile:
-    for line in infile:
-        text = str(u.urlopen(line).read())
+with open('input.txt') as infile:  # Создание файлового объекта при помощи функции open.
+    for line in infile:  # Цикл для последовательного вывода информации об игроках.
+        text = str(u.urlopen(line).read())  # Считываем содержимое web-страницы с помощью функции urlopen.
 
-        part_name = text.find("nfl-c-player-header__title")
-        name = text[text.find('>', part_name) + 1:text.find('</h1', part_name)]
-        attrate = text.find("passingAttempts")
-        att = text[text.find('>', attrate) + 3:text.find('</th>', attrate)].replace('\\n', '').strip()
-        comprate = text.find("passingCompletions")
-        comp = text[text.find('>', comprate) + 3:text.find('</th>', comprate)].replace('\\n', '').strip()
-        ydsrate = text.find("passingYards")
-        yds = text[text.find('>', ydsrate) + 3:text.find('</th>', ydsrate)].replace('\\n', '').strip()
-        tdrate = text.find("passingTouchdowns")
-        td = text[text.find('>', tdrate) + 3:text.find('</th>', tdrate)].replace('\\n', '').strip()
-        intrate = text.find("passingInterceptions")
-        intr = text[text.find('>', intrate) + 3:text.find('</th>', intrate)].replace('\\n', '').strip()
-        finrate = text.find("passingPasserRating")
-        fin = float(text[text.find('>', finrate) + 3:text.find('</th>', finrate)].replace('\\n', '').strip())
+        name = text.find("nfl-c-player-header__title")  # Анализ HTML-разметки страницы для получения имени игрока.
+        name = text[text.find('>', name) + 1:text.find('</h1', name)]
+        ATT = text.find("passingAttempts")  # Анализ HTML-разметки страницы для получения параметров игрока (1).
+        ATT = text[text.find('>', ATT) + 3:text.find('</th>', ATT)].replace('\\n', '').strip()
+        COMP = text.find("passingCompletions") # Анализ HTML-разметки страницы для (1).
+        COMP = text[text.find('>', COMP) + 3:text.find('</th>', COMP)].replace('\\n', '').strip()
+        YDS = text.find("passingYards")  # Анализ HTML-разметки страницы для (1).
+        YDS = text[text.find('>', YDS) + 3:text.find('</th>', YDS)].replace('\\n', '').strip()
+        TD = text.find("passingTouchdowns")  # Анализ HTML-разметки страницы для (1).
+        TD = text[text.find('>', TD) + 3:text.find('</th>', TD)].replace('\\n', '').strip()
+        INT = text.find("passingInterceptions")  # Анализ HTML-разметки страницы для (1).
+        INT = text[text.find('>', INT) + 3:text.find('</th>', INT)].replace('\\n', '').strip()
+        RATE = text.find("passingPasserRating")  # Анализ HTML-разметки страницы для получения квотербек-рейтинга.
+        RATE = float(text[text.find('>', RATE) + 3:text.find('</th>', RATE)].replace('\\n', '').strip())
 
-        with open('output.txt', 'w') as out:
-            print('{:<20}{:<7}{:<7}{:<7}{:<7}{:<7}{:.2f}'.format(name, comp, att, yds, td, intr, fin))
+        with open('output.txt', 'w') as outfile:  # Оформление полученных данных в виде таблицы, используя метод format.
+            print('{:<20}{:<7}{:<7}{:<7}{:<7}{:<7}{:.2f}'.format(name, COMP, ATT, YDS, TD, INT, RATE))
